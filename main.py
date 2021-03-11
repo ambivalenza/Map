@@ -6,7 +6,7 @@ import pygame, requests, sys, os
 class MapParams(object):
     def __init__(self):
         self.lat = 61.665279  # Координаты центра карты на старте. Задал координаты университета
-        self.lon = 50.813492
+        self.lon = 60.813492
         self.zoom = 16  # Масштаб карты на старте. Изменяется от 1 до 19
         self.type = "map"  # Другие значения "sat", "sat,skl"
 
@@ -43,8 +43,10 @@ def main():
     mp = MapParams()
     while True:
         event = pygame.event.wait()
-        if event.type == pygame.QUIT:  # Выход из программы
+        if event.type == pygame.QUIT:
             break
+        elif event.type == pygame.KEYUP:
+            mp.update(event)
         # Создаем файл
         map_file = load_map(mp)
         # Рисуем картинку, загружаемую из только что созданного файла.
